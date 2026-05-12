@@ -1,15 +1,55 @@
-const name = prompt('Enter your name: '); //I am declare varibable with const for the varibable is unic. 
-const age = Number(prompt('Enter your age: '));
+//FIRST STEP
 
-if (isNaN(age)) { //isNaN is a built-in global function in JavaScript for declared "Not a number"
-    alert('¡Error! that not are a number.'); //That one I used IsNaN for declare if age no is a Number return error. 
+const name_product = prompt("Enter a name of product: ") 
+const price = Number(prompt("Enter a price of product: "))
+const id = Number(prompt("Enter your cc in order to update your product in list under your name: "))
+
+if (isNaN(price) || (isNaN(id))) {
+    alert("Error: only accept numbers.")
 } else {
-    alert(`Yeah, excelent the age is: ${age} `);
+    console.log(`That's true!, your cc is ${id} the nombre of product ${name_product} and the price is ${price}`)
 }
 
-if (age >= 18) {
-    alert(`Hello ${name}, you are adult, prepate for big oportunites around the world of software programing!`)
-} else {
-    alert(`Hello!, ${name}, you age is don´t permit, !Continue with your lessons!. `)
+const products = {
+    "id": id,
+    "name_product": name_product,
+    "price": price
 }
 
+console.log(products);
+
+//SECOND STEP
+
+const chosses = new Set
+
+chosses.add("Tecnology");
+chosses.add("Office");
+chosses.add("Home");
+
+//THIRTH STEP
+
+const number = new Map
+
+number.set(1, "Laptop")
+number.set(2, "Mouse")
+number.set(3, "Keyboard")
+number.set(4, "Desk")
+number.set(5, "Chair")
+
+console.log("=== OBJECT ====");
+
+for (let product in products) {
+    console.log(`${product}: ${products[product]}`)
+}
+
+console.log("=== SET ===");
+
+for (let chosse of chosses) {
+    console.log(chosse)
+}
+
+console.log("=== MAP ===");
+
+number.forEach((valor, clave) => { 
+    console.log(`Clave: ${clave} | Valor: ${valor}`);
+});
