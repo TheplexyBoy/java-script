@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+</head>
+<body>
+    <main>
+        <h1>Mis gustos comidales</h1>
+        <p>Aca abajo agregaras tu gustos comidales :3</p>
+        <section>
+            <form id="formulario" action="">
+                <input type="text" id="input">
+                <button id="buttonAdd">Agregar</button>
+                <button id="buttonRm">Eliminar</button>
+            </form>
+        </section>
+        <section>
+            <ul id="GustosComidales"></ul>
+        </section>
+    </main>
+    <script>
+        const ipt = document.getElementById("input")
+        const btnadd = document.getElementById("buttonAdd")
+        const btnrm = document.getElementById("buttonRm")
+        const list = document.getElementById("GustosComidales")
+
+        btnadd.addEventListener("click", function(event) {
+
+            event.preventDefault()
+
+            if (ipt.value === "")  {
+                alert("Enter your comidales like, please :)")
+                return
+            } 
+
+            const li = document.createElement("li")
+            li.textContent = ipt.value
+
+            list.appendChild(li)
+
+            ipt.value = ""
+        })
+
+        btnrm.addEventListener("click", function(event) { 
+
+            event.preventDefault()
+
+            const li = document.querySelectorAll("li")
+            let eliminado = false
+
+            li.forEach(function(li) { 
+
+                if (li.textContent === ipt.value.trim) { 
+                    li.remove()
+                    eliminado = true
+                }
+            })
+
+
+            if (eliminado) {
+                alert(`Se ha eliminado correctamente :)`)
+            } else {
+                alert("Erro: Content don't found.")
+            }
+
+            ipt.value = ""
+
+        })
+        
+
+
+    </script>
+</body>
+</html>
