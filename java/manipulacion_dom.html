@@ -21,55 +21,66 @@
         </section>
     </main>
     <script>
-        const ipt = document.getElementById("input")
-        const btnadd = document.getElementById("buttonAdd")
-        const btnrm = document.getElementById("buttonRm")
-        const list = document.getElementById("GustosComidales")
+        const ipt = document.getElementById("input");
+        const btnadd = document.getElementById("buttonAdd");
+        const btnrm = document.getElementById("buttonRm");
+        const list = document.getElementById("GustosComidales");
+
+        let misGustos = JSON.parse(localStorage.getItem("GustosComidales")) || [];
+
+        function rendizarlista() {
+            list.innerHTML = "";
+            misGustos.forEach(gusto => {
+                const li = document.createElement("li");
+                li.textContent = gusto;
+                list.appendChild(li)    
+            } 
+
+            )
+        };
+
+        rendizarlista();    
 
         btnadd.addEventListener("click", function(event) {
 
-            event.preventDefault()
+            event.preventDefault();
 
-            if (ipt.value === "")  {
-                alert("Enter your comidales like, please :)")
+            if (ipt.value.trim() === "")  {
+                alert("Enter your comidales like, please :)");
                 return
             } 
 
-            const li = document.createElement("li")
-            li.textContent = ipt.value
+            misGustos.push(ipt.value);
 
-            list.appendChild(li)
+            localStorage.setItem("GustosComidales", JSON.stringify(misGustos));
+
+            rendizarlista();
 
             ipt.value = ""
-        })
+        });
 
         btnrm.addEventListener("click", function(event) { 
 
             event.preventDefault()
 
-            const li = document.querySelectorAll("li")
-            let eliminado = false
+            const EliminarGusto = ipt.value.trim();
 
-            li.forEach(function(li) { 
+            if (misGustos.includes(EliminarGusto)) { 
 
-                if (li.textContent === ipt.value.trim) { 
-                    li.remove()
-                    eliminado = true
+                misGustos = misGustos.filter(gusto => gusto !== EliminarGusto);
+
+                localStorage.setItem("GustosComidales", JSON.stringify(misGustos));
+
+                rendizarlista();
+
+                    alert(`Se ha eliminado correctamente :)`);
+                } else {
+                    alert("Erro: Content don't found.");
                 }
-            })
 
+                ipt.value = ""
 
-            if (eliminado) {
-                alert(`Se ha eliminado correctamente :)`)
-            } else {
-                alert("Erro: Content don't found.")
-            }
-
-            ipt.value = ""
-
-        })
-        
-
+        });
 
     </script>
 </body>
